@@ -84,7 +84,7 @@ class BaeCounter(object):
         if start < 0 or limit <= 0:
             raise Exception
         counters = {}
-        for i in self._sorted[start:limit]:
+        for i in self._sorted[start:(start+limit)]:
             counters[unicode(i)] = self._cache[i]
         ret = copy.deepcopy(RETURN)
         ret.update({u'response_params': {u'total_num': len(self._cache), u'counters':counters}})
