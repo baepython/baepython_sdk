@@ -2,6 +2,10 @@ import os
 import copy
 import time as t
 import pickle
+try:
+    import simplejson as json
+except:
+    json
 
 MAX_NAME_LEN = 128
 MAX_RANK =  100
@@ -53,12 +57,12 @@ class BaeRankManager(object):
             if o._expire > 0 and o._expire < t.time():
                 o._cache = {}
                 o._sorted = []
-            ranks[n] = {u'key_limit': o._keylimit,
-                        u'expire_time': o._expire,
-                        u'create_time': 0,
-                        u'next_expire_time': 0,
-                        u'key_num': len(o._cache),
-                        u'order': 0 if o._order else 1}
+            ranks[unicode(n)] = unicode(json.dumps({u'key_limit': o._keylimit,
+                                        u'expire_time': o._expire,
+                                        u'create_time': 0,
+                                        u'next_expire_time': 0,
+                                        u'key_num': len(o._cache),
+                                        u'order': 0 if o._order else 1}))
         ret.update({u'response_params': {u'ranks': ranks, u'total_num': len(self._cache)}})
         return ret
 
