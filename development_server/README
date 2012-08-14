@@ -1,0 +1,6 @@
+BAE Python本地调试环境
+
+HOWTO
+-----
+$ ./run_server.py -p ${YOUR_PORT} --app=${YOUR_APP_ROOT}
+
