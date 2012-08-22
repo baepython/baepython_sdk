@@ -18,8 +18,7 @@ ERR_RESPONSE = -1
 class BaeBCS(object):
     def __init__(self, host=None, ak=None, sk=None, httpclient_class=None):
         """¹¹Ôìº¯Êı
-        ²ÎÊı£
-            host(str):       BCS·şÎñÆ÷µØÖ·
+        ²ÎÊı?            host(str):       BCS·şÎñÆ÷µØÖ·
             ak(str):         access key
             sk(str):         secret key
             httpclient_class:  ÓëBCS·şÎñÆ÷½»»¥µÄHTTP½Ó¿ÚÀà£¬Ä¬ÈÏÎªHttplibHTTPC
@@ -45,8 +44,6 @@ class BaeBCS(object):
             Ê§°ÜÇé¿öÏÂ£¬responseÊÇ·şÎñÆ÷·µ»ØµÄÔ­Ê¼ĞÅÏ¢
         Òì³££º
             httplib.HTTPException:  Í¬ºó¶Ë½»»¥¹ı³ÌÖĞ³öÏÖÍøÂç´íÎó
-            BaeValueError:          ºó¶Ë·µ»ØµÄÊı¾İ¸ñÊ½´íÎó
-            BaeOperationFailed:     ºó¶Ë·µ»Ø½á¹û£¬µ«±¾´Î²Ù×÷Ê§°Ü£¬Òì³£ÖĞ°üº¬ÁË´íÎóÔ­Òò
         """
 
         r = self.httpc.get(self.get_url)
@@ -67,10 +64,7 @@ class BaeBCS(object):
             ³É¹¦Çé¿öÏÂ£¬responseÎªNone
             Ê§°ÜÇé¿öÏÂ£¬responseÊÇ·şÎñÆ÷·µ»ØµÄÔ­Ê¼ĞÅÏ¢
         Òì³££º
-            BaeParamError£º         ²ÎÊı´íÎó
             httplib.HTTPException:  Í¬ºó¶Ë½»»¥¹ı³ÌÖĞ³öÏÖÍøÂç´íÎó
-            BaeValueError:          ºó¶Ë·µ»ØµÄÊı¾İ¸ñÊ½´íÎó
-            BaeOperationFailed:     ºó¶Ë·µ»Ø½á¹û£¬µ«±¾´Î²Ù×÷Ê§°Ü£¬Òì³£ÖĞ°üº¬ÁË´íÎóÔ­Òò
         """
         url = self._sign('PUT', bname, oname)
         r = self.httpc.put(url, data, headers={})
@@ -87,10 +81,7 @@ class BaeBCS(object):
             ³É¹¦Çé¿öÏÂ£¬responseÎªobject¶ÔÓ¦µÄÊı¾İ
             Ê§°ÜÇé¿öÏÂ£¬responseÎª·şÎñÆ÷·µ»ØµÄÔ­Ê¼ĞÅÏ¢
         Òì³££º
-            BaeParamError£º         ²ÎÊı´íÎó
             httplib.HTTPException:  Í¬ºó¶Ë½»»¥¹ı³ÌÖĞ³öÏÖÍøÂç´íÎó
-            BaeValueError:          ºó¶Ë·µ»ØµÄÊı¾İ¸ñÊ½´íÎó
-            BaeOperationFailed:     ºó¶Ë·µ»Ø½á¹û£¬µ«±¾´Î²Ù×÷Ê§°Ü£¬Òì³£ÖĞ°üº¬ÁË´íÎóÔ­Òò
         """
         url = self._sign('GET', bname, oname)
         r = self.httpc.get(url, headers={})
@@ -107,10 +98,7 @@ class BaeBCS(object):
             ³É¹¦Çé¿öÏÂ£¬responseÎªNone
             Ê§°ÜÇé¿öÏÂ£¬responseÊÇ·şÎñÆ÷·µ»ØµÄÔ­Ê¼ĞÅÏ¢
         Òì³££º
-            BaeParamError£º         ²ÎÊı´íÎó
             httplib.HTTPException:  Í¬ºó¶Ë½»»¥¹ı³ÌÖĞ³öÏÖÍøÂç´íÎó
-            BaeValueError:          ºó¶Ë·µ»ØµÄÊı¾İ¸ñÊ½´íÎó
-            BaeOperationFailed:     ºó¶Ë·µ»Ø½á¹û£¬µ«±¾´Î²Ù×÷Ê§°Ü£¬Òì³£ÖĞ°üº¬ÁË´íÎóÔ­Òò
         """
         url = self._sign('DELETE', bname, oname)
         r = self.httpc.delete(url, headers={})
@@ -129,10 +117,7 @@ class BaeBCS(object):
             ³É¹¦Çé¿öÏÂ£¬responseÎªobject nameÁĞ±í
             Ê§°ÜÇé¿öÏÂ£¬responseÎª·şÎñÆ÷·µ»ØµÄÔ­Ê¼ĞÅÏ¢
         Òì³££º
-            BaeParamError£º         ²ÎÊı´íÎó
             httplib.HTTPException:  Í¬ºó¶Ë½»»¥¹ı³ÌÖĞ³öÏÖÍøÂç´íÎó
-            BaeValueError:          ºó¶Ë·µ»ØµÄÊı¾İ¸ñÊ½´íÎó
-            BaeOperationFailed:     ºó¶Ë·µ»Ø½á¹û£¬µ«±¾´Î²Ù×÷Ê§°Ü£¬Òì³£ÖĞ°üº¬ÁË´íÎóÔ­Òò
         """
         params = { 'start': start, 'limit': limit}
         if prefix:
@@ -157,10 +142,7 @@ class BaeBCS(object):
             ³É¹¦Çé¿öÏÂ£¬responseÎªNone
             Ê§°ÜÇé¿öÏÂ£¬responseÊÇ·şÎñÆ÷·µ»ØµÄÔ­Ê¼ĞÅÏ¢
         Òì³££º
-            BaeParamError£º         ²ÎÊı´íÎó
             httplib.HTTPException:  Í¬ºó¶Ë½»»¥¹ı³ÌÖĞ³öÏÖÍøÂç´íÎó
-            BaeValueError:          ºó¶Ë·µ»ØµÄÊı¾İ¸ñÊ½´íÎó
-            BaeOperationFailed:     ºó¶Ë·µ»Ø½á¹û£¬µ«±¾´Î²Ù×÷Ê§°Ü£¬Òì³£ÖĞ°üº¬ÁË´íÎóÔ­Òò
         """
         headers = {}
         headers.update( {
@@ -183,10 +165,7 @@ class BaeBCS(object):
             ³É¹¦Çé¿öÏÂ£¬responseÎªNone
             Ê§°ÜÇé¿öÏÂ£¬responseÊÇ·şÎñÆ÷·µ»ØµÄÔ­Ê¼ĞÅÏ¢
         Òì³££º
-            BaeParamError£º         ²ÎÊı´íÎó
             httplib.HTTPException:  Í¬ºó¶Ë½»»¥¹ı³ÌÖĞ³öÏÖÍøÂç´íÎó
-            BaeValueError:          ºó¶Ë·µ»ØµÄÊı¾İ¸ñÊ½´íÎó
-            BaeOperationFailed:     ºó¶Ë·µ»Ø½á¹û£¬µ«±¾´Î²Ù×÷Ê§°Ü£¬Òì³£ÖĞ°üº¬ÁË´íÎóÔ­Òò
         """
         l = []
         try:
@@ -215,10 +194,7 @@ class BaeBCS(object):
             ³É¹¦Çé¿öÏÂ£¬responseÎªNone
             Ê§°ÜÇé¿öÏÂ£¬responseÊÇ·şÎñÆ÷·µ»ØµÄÔ­Ê¼ĞÅÏ¢
         Òì³££º
-            BaeParamError£º         ²ÎÊı´íÎó
             httplib.HTTPException:  Í¬ºó¶Ë½»»¥¹ı³ÌÖĞ³öÏÖÍøÂç´íÎó
-            BaeValueError:          ºó¶Ë·µ»ØµÄÊı¾İ¸ñÊ½´íÎó
-            BaeOperationFailed:     ºó¶Ë·µ»Ø½á¹û£¬µ«±¾´Î²Ù×÷Ê§°Ü£¬Òì³£ÖĞ°üº¬ÁË´íÎóÔ­Òò
         """
         url = self._sign('PUT', bname, oname) + '&acl=1'
         r = self.httpc.put(url, acl, headers={})
@@ -235,10 +211,7 @@ class BaeBCS(object):
             ³É¹¦Çé¿öÏÂ£¬responseÎªÃèÊöbucket»òobject¶ÔÓ¦µÄACLµÄ×Ö·û´®
             Ê§°ÜÇé¿öÏÂ£¬responseÎª·şÎñÆ÷·µ»ØµÄÔ­Ê¼ĞÅÏ¢
         Òì³££º
-            BaeParamError£º         ²ÎÊı´íÎó
             httplib.HTTPException:  Í¬ºó¶Ë½»»¥¹ı³ÌÖĞ³öÏÖÍøÂç´íÎó
-            BaeValueError:          ºó¶Ë·µ»ØµÄÊı¾İ¸ñÊ½´íÎó
-            BaeOperationFailed:     ºó¶Ë·µ»Ø½á¹û£¬µ«±¾´Î²Ù×÷Ê§°Ü£¬Òì³£ÖĞ°üº¬ÁË´íÎóÔ­Òò
         """
         url = self._sign('GET', bname, oname) + '&acl=1'
         r = self.httpc.get(url, headers={})
@@ -256,10 +229,7 @@ class BaeBCS(object):
             ³É¹¦Çé¿öÏÂ£¬responseÎªNone
             Ê§°ÜÇé¿öÏÂ£¬responseÊÇ·şÎñÆ÷·µ»ØµÄÔ­Ê¼ĞÅÏ¢
         Òì³££º
-            BaeParamError£º         ²ÎÊı´íÎó
             httplib.HTTPException:  Í¬ºó¶Ë½»»¥¹ı³ÌÖĞ³öÏÖÍøÂç´íÎó
-            BaeValueError:          ºó¶Ë·µ»ØµÄÊı¾İ¸ñÊ½´íÎó
-            BaeOperationFailed:     ºó¶Ë·µ»Ø½á¹û£¬µ«±¾´Î²Ù×÷Ê§°Ü£¬Òì³£ÖĞ°üº¬ÁË´íÎóÔ­Òò
         """
         if not os.path.isfile(filename):
             raise Exception(filename + ' is not a file')
@@ -280,10 +250,7 @@ class BaeBCS(object):
             ³É¹¦Çé¿öÏÂ£¬responseÎªNone
             Ê§°ÜÇé¿öÏÂ£¬responseÊÇ·şÎñÆ÷·µ»ØµÄÔ­Ê¼ĞÅÏ¢
         Òì³££º
-            BaeParamError£º         ²ÎÊı´íÎó
             httplib.HTTPException:  Í¬ºó¶Ë½»»¥¹ı³ÌÖĞ³öÏÖÍøÂç´íÎó
-            BaeValueError:          ºó¶Ë·µ»ØµÄÊı¾İ¸ñÊ½´íÎó
-            BaeOperationFailed:     ºó¶Ë·µ»Ø½á¹û£¬µ«±¾´Î²Ù×÷Ê§°Ü£¬Òì³£ÖĞ°üº¬ÁË´íÎóÔ­Òò
         """
         url = self._sign('GET', bname, oname)
         r = self.httpc.get_file(url, filename, headers={})
@@ -301,10 +268,7 @@ class BaeBCS(object):
             ³É¹¦Çé¿öÏÂ£¬responseÎªNone
             Ê§°ÜÇé¿öÏÂ£¬responseÊÇ·şÎñÆ÷·µ»ØµÄÔ­Ê¼ĞÅÏ¢
         Òì³££º
-            BaeParamError£º         ²ÎÊı´íÎó
             httplib.HTTPException:  Í¬ºó¶Ë½»»¥¹ı³ÌÖĞ³öÏÖÍøÂç´íÎó
-            BaeValueError:          ºó¶Ë·µ»ØµÄÊı¾İ¸ñÊ½´íÎó
-            BaeOperationFailed:     ºó¶Ë·µ»Ø½á¹û£¬µ«±¾´Î²Ù×÷Ê§°Ü£¬Òì³£ÖĞ°üº¬ÁË´íÎóÔ­Òò
         """
 
         acl = '{"statements":[{"action":["*"],"effect":"allow","resource":["%s%s"],"user":["%s"]}]}' % (
