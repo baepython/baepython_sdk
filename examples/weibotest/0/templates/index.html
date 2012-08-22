@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta property="wb:webmaster" content="9c168288bbdb6109" />
+    <title>城市天气预报</title>
+    <link rel="stylesheet" href="/static/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="/static/custom.css" type="text/css" />
+    <script type="text/javascript" src="/static/jquery-1.6.1-min.js"></script>
+    <script type="text/javascript">
+      function change_city(city) {
+        location.assign('/?city=' + city);
+      }
+      function set_weather(data) {
+        var today = data.forecast[0];
+        var tomorrow = data.forecast[1];
+        $('#x-today-icon').css('background-image', 'url(/static/i/w/d' + today.code + '.png)');
+        $('#x-tomorrow-icon').css('background-image', 'url(/static/i/w/d' + tomorrow.code + '.png)');
+        $('#x-today-text').text(today.condition);
+        $('#x-tomorrow-text').text(tomorrow.condition);
+        $('#x-today-temp').text(today.low_temperature + ' ~ ' + today.high_temperature + '°');
+        $('#x-tomorrow-temp').text(tomorrow.low_temperature + ' ~ ' + tomorrow.high_temperature + '°');
+      }
+
+      $(function() {
+        $.getJSON('/weather?city=${city}', function(data) {
+          set_weather(data);
+        });
+      });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="span24">&nbsp</div>
+        </div>
+        <div class="row">
+            <div class="span16">
+                <div class="row">
+                    <div class="span8">
+                        <select id="select-city" name="select-city" onchange="change_city(this.value)">
+% for c in cities:
+                            <option value="${c.yahoo_code}"
+% if city==c.yahoo_code:
+                                selected="selected"
+% endif
+                            >${c.name}</option>
+% endfor
+                        </select>
+                    </div>
+                    <div class="span8">
+                        <div class="row">
+% if user:
+                            <div class="span2 align-right">
+                                <a href="http://weibo.com/u/${user.uid}"><img src="${user.image_url}" width="50" height="50" style="border:solid 1px #ccc" /></a>
+                            </div>
+                            <div class="span6">
+                                <p>您好，<a target="_blank" href="http://weibo.com/u/${user.uid}">${user.name}</a>！</p>
+                                <p><a href="/logout">安全登出</a></p>
+                            </div>
+% else:
+                            <div class="span8">
+                                <a href="/login"><img src="/static/i/weibologin.png" width="126" height="24" /></a>
+                            </div>
+% endif
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="span8">
+                        <div class="weather-date">
+                            <span class="h">今日天气</span>
+                            <span id="x-today-date">${today[0]}</span>
+                            <span id="x-today-day">${today[1]}</span>
+                        </div>
+                        <div class="weather-report">
+                            <div id="x-today-icon" class="weather-icon">
+                                <div class="weather-text">
+                                    <p id="x-today-text">Loading...</p>
+                                    <p id="x-today-temp">Loading...</p>
+                                </div>
+                            </div>
+                        </div>
+% if user:
+                        <div class="share align-right">
+                            <a target="_blank" href="/share?city=${city}"><img src="/static/i/weiboshare.gif" width="106" height="24" /></a>
+                        </div>
+% endif
+                    </div>
+                    <div class="span8">
+                        <div class="weather-date">
+                            <span class="h">明日天气</span>
+                            <span id="x-tomorrow-date">${tomorrow[0]}</span>
+                            <span id="x-tomorrow-day">${tomorrow[1]}</span>
+                        </div>
+                        <div class="weather-report">
+                            <div id="x-tomorrow-icon" class="weather-icon">
+                                <div class="weather-text">
+                                    <p id="x-tomorrow-text">Loading...</p>
+                                    <p id="x-tomorrow-temp">Loading...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span16">
+                        <div>
+                            <h3>GTalk机器人</h3>
+                        </div>
+                        <div>
+                            <p>如果您使用Google Talk，可以添加机器人 <strong>weather-china@appspot.com</strong> 为好友，随时向他询问天气预报：</p>
+                            <p><img src="/static/i/snapshot-xmpp.png" width="300" height="254"></p>
+                        </div>
+                        <div>
+                            <h3>Chrome浏览器插件</h3>
+                        </div>
+                        <div>
+                            <p>如果您使用的是支持HTML 5的Google Chrome浏览器，可以<a href="https://chrome.google.com/extensions/detail/gbmkicglakjoppnghhiceacmbbaihoeh" target="_blank">安装最新插件</a>以便随时获取天气预报：</p>
+                            <p><a href="https://chrome.google.com/extensions/detail/gbmkicglakjoppnghhiceacmbbaihoeh" target="_blank"><img src="/static/i/snapshot-chrome-extension.png" width="291" height="99" style="margin:12px"></a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span8">
+<!-- BEGIN AD -->
+<script type="text/javascript"><!--
+google_ad_client = "pub-6727358730461554";
+/* 300x250 */
+google_ad_slot = "8201905603";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+<script type="text/javascript"><!--
+google_ad_client = "pub-6727358730461554";
+/* 300x250 */
+google_ad_slot = "8201905603";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+<script type="text/javascript"><!--
+google_ad_client = "pub-6727358730461554";
+/* 300x250 */
+google_ad_slot = "8201905603";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+<!-- END AD -->
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="span24 align-center">
+                <p>城市天气预报为您提供中国主要城市的天气预报，数据来源：<a href="http://developer.yahoo.com/weather/" target="_blank">雅虎天气</a>，使用<a href="http://code.google.com/p/sinaweibopy/" target="_blank">sinaweibopy</a>客户端连接到新浪微博</p>
+                <p>微博关注<a href="http://weibo.com/weatherchina" target="_blank">@我的城市天气预报</a>，每天获得最新天气预报</p>
+                <p>城市天气预报，版权所有&copy;2007-2012</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

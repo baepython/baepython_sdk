@@ -1,0 +1,66 @@
+/* -----------------------------------------------------------------------
+ Custom CSS
+----------------------------------------------------------------------- */
+
+.align-center {
+  text-align:center;
+}
+
+.align-right {
+  text-align:right;
+}
+
+a:link { color:#00f; text-decoration:none; }
+a:visited { color:#00f; text-decoration:none; }
+a:hover { color:#f00; text-decoration:none; }
+a:active { color:#f00; text-decoration:none; }
+
+.share {
+  padding-right:14px;
+}
+
+.weather-report {
+  background-image: url(/static/i/w-bg.png);
+  background-repeat: no-repeat;
+  background-position: 56px 70px;
+  margin: 0px;
+  padding: 0px;
+  width: 300px;
+  height: 160px;
+}
+
+.weather-icon {
+  background-image: url(/static/i/w/d44.png);
+  background-repeat: no-repeat;
+  margin: 0px;
+  padding: 0px;
+  width: 300px;
+  height: 160px;
+}
+
+.weather-text {
+  text-align: right;
+  margin: 0px;
+  padding-top: 76px;
+  padding-right: 20px;
+}
+
+.weather-text p {
+  margin: 0px;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  text-shadow: #315895 0px -1px 1px;
+  line-height: 28px;
+}
+
+.weather-date span {
+  margin: 3px 0px 3px 3px;
+  font-weight: bold;
+  font-size: 16px;
+  display: inline;
+}
+
+span.h {
+  font-size: 24px;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ADD</title>
+    <link rel="stylesheet" href="/static/bootstrap.css" type="text/css" />
+    <script type="text/javascript" src="/static/jquery-1.6.1-min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="span24">&nbsp;</div>
+        </div>
+        <div class="row">
+            <div class="span24">
+                <table class="bordered-table">
+                    <tr>
+                        <th># ID #</th>
+                        <th>NAME</th>
+                        <th>ALIAS</th>
+                        <th>YAHOO_CODE</th>
+                        <th>WEIBO_CODE</th>
+                    </tr>
+% for c in cities:
+                    <tr>
+                        <td>${c.id}</td>
+                        <td>${c.name}</td>
+                        <td>${c.alias}</td>
+                        <td>${c.yahoo_code}</td>
+                        <td>${c.weibo_code}</td>
+                    </tr>
+% endfor
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span24">&nbsp;</div>
+        </div>
+        <div class="row">
+            <div class="span24">
+                <form name="addcity" action="add_city" method="post">
+                    <p>Name: <input type="text" name="name" /></p>
+                    <p>Alias: <input type="text" name="alias" /></p>
+                    <p>Yahoo: <input type="text" name="yahoo_code" /></p>
+                    <p>Weibo: <input type="text" name="weibo_code" /></p>
+                    <p><button type="submit" name="btn" class="btn">Add</button></p>
+                </form>
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="span24">&nbsp;</div>
+        </div>
+    </div>
+</body>
+</html>
