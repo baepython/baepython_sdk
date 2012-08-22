@@ -18,7 +18,8 @@ ERR_RESPONSE = -1
 class BaeBCS(object):
     def __init__(self, host=None, ak=None, sk=None, httpclient_class=None):
         """构造函数
-        参数?            host(str):       BCS服务器地址
+        参数:            
+            host(str):       BCS服务器地址
             ak(str):         access key
             sk(str):         secret key
             httpclient_class:  与BCS服务器交互的HTTP接口类，默认为HttplibHTTPC
