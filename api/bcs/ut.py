@@ -3,7 +3,7 @@ import os
 import time
 from bcs import BaeBCS
 
-BCS_HOST   = "http://bcs.bae.baidu.com"
+BCS_HOST   = "http://bcs.duapp.com"
 ACCESS_KEY = "your access key" 
 SECRET_KEY = "your secret key"
 
