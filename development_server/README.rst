@@ -12,7 +12,9 @@ DirectoryTree
 |-- development_server (本地开发环境根目录)
 
     |-- run_server.py  (启动一个web server)
+    
     |-- baetools       (上传下载Bae App脚本)
+
     |-- bundle.py      (第三方库下载打包脚本) 
     
     |-- demo           (Bae App示例)
