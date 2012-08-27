@@ -114,7 +114,10 @@ def main():
                 copy_pkg(os.path.join(mp, tl.rstrip()))
 
     if options.zipmode:
-        child = subprocess.Popen("/usr/bin/zip -r %s %s"%(ZIP_BUNDLE, BUNDLE_DIR), stdout = subprocess.PIPE, stderr = subprocess.PIPE, shell = True) 
+        pwd = os.getcwd()
+        os.chdir(os.path.abspath(os.path.expanduser(BUNDLE_DIR)))        
+        child = subprocess.Popen("/usr/bin/zip -r %s *"%os.path.join(pwd, ZIP_BUNDLE), stdout = subprocess.PIPE, stderr = subprocess.PIPE, shell = True)
+        os.chdir(pwd)
         if child.wait() != 0:
             print '\n'.join(child.communicate()).strip()
             return 
