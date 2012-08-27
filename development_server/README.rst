@@ -36,7 +36,7 @@ HowTo
     # -p 指定端口 -app 指定本地运行的app目录
     ~$ ./run_server.py -p ${YOUR_PORT} --app=${YOUR_APP_ROOT}
 
-*下载Bae app目录到本地, 部署本地目录到Bae
+*下载Bae app目录到本地, 部署本地目录到Bae*
 ::
 
     ~$ ./baetools -h
