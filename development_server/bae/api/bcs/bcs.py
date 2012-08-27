@@ -17,12 +17,12 @@ ERR_RESPONSE = -1
 
 class BaeBCS(object):
     def __init__(self, host=None, ak=None, sk=None, httpclient_class=None):
-        """¹¹Ôìº¯Êı
-        ²ÎÊı:            
-            host(str):       BCS·şÎñÆ÷µØÖ·
+        """æ„é€ å‡½æ•°
+        å‚æ•°
+            host(str):       BCSæœåŠ¡å™¨åœ°å€
             ak(str):         access key
             sk(str):         secret key
-            httpclient_class:  ÓëBCS·şÎñÆ÷½»»¥µÄHTTP½Ó¿ÚÀà£¬Ä¬ÈÏÎªHttplibHTTPC
+            httpclient_class:  ä¸BCSæœåŠ¡å™¨äº¤äº’çš„HTTPæ¥å£ç±»ï¼Œé»˜è®¤ä¸ºHttplibHTTPC
         """
         self.host = host
         self.ak   = ak
@@ -36,17 +36,16 @@ class BaeBCS(object):
         self.get_url = self._sign('GET', '', '/')
 
     def list_buckets(self):
-        """ÁĞ¾ÙÊôÓÚ×Ô¼ºµÄbuckets
-        ²ÎÊı£º
-        ·µ»ØÖµ£º
-            ·µ»ØÖµÎª (errcode, response)ĞÎÊ½µÄtuple
-            ÆäÖĞerrcodeÎª´íÎóÂë£¬ERR_OK±íÊ¾³É¹¦£¬ÆäËü±íÊ¾Ê§°Ü
-            ³É¹¦Çé¿öÏÂ£¬responseÎªbucket nameÁĞ±í
-            Ê§°ÜÇé¿öÏÂ£¬responseÊÇ·şÎñÆ÷·µ»ØµÄÔ­Ê¼ĞÅÏ¢
-        Òì³££º
-            httplib.HTTPException:  Í¬ºó¶Ë½»»¥¹ı³ÌÖĞ³öÏÖÍøÂç´íÎó
+        """åˆ—ä¸¾å±äºè‡ªå·±çš„buckets
+        å‚æ•°ï¼š
+        è¿”å›å€¼ï¼š
+            è¿”å›å€¼ä¸º (errcode, response)å½¢å¼çš„tuple
+            å…¶ä¸­errcodeä¸ºé”™è¯¯ç ï¼ŒERR_OKè¡¨ç¤ºæˆåŠŸï¼Œå…¶å®ƒè¡¨ç¤ºå¤±è´¥
+            æˆåŠŸæƒ…å†µä¸‹ï¼Œresponseä¸ºbucket nameåˆ—è¡¨
+            å¤±è´¥æƒ…å†µä¸‹ï¼Œresponseæ˜¯æœåŠ¡å™¨è¿”å›çš„åŸå§‹ä¿¡æ¯
+        å¼‚å¸¸ï¼š
+            httplib.HTTPException:  åŒåç«¯äº¤äº’è¿‡ç¨‹ä¸­å‡ºç°ç½‘ç»œé”™è¯¯
         """
-
         r = self.httpc.get(self.get_url)
         e, d = self._handle_response(r, 2)
         if e != ERR_OK:
@@ -54,71 +53,71 @@ class BaeBCS(object):
         return (e, [b['bucket_name'].encode('utf8') for b in d])
 
     def put_object(self, bname, oname, data):
-        """ÉÏ´«Êı¾İµ½Ö¸¶¨object
-        ²ÎÊı£º
-            bname(str):     bucket name£¬±ØĞëÔ¤ÏÈ´´½¨
+        """ä¸Šä¼ æ•°æ®åˆ°æŒ‡å®šobject
+        å‚æ•°ï¼š
+            bname(str):     bucket nameï¼Œå¿…é¡»é¢„å…ˆåˆ›å»º
             oname(str):     object name
-            data£º          ´ıÉÏ´«µÄÊı¾İ
-        ·µ»ØÖµ£º
-            ·µ»ØÖµÎª (errcode, response)ĞÎÊ½µÄtuple
-            ÆäÖĞerrcodeÎª´íÎóÂë£¬ERR_OK±íÊ¾³É¹¦£¬ÆäËü±íÊ¾Ê§°Ü
-            ³É¹¦Çé¿öÏÂ£¬responseÎªNone
-            Ê§°ÜÇé¿öÏÂ£¬responseÊÇ·şÎñÆ÷·µ»ØµÄÔ­Ê¼ĞÅÏ¢
-        Òì³££º
-            httplib.HTTPException:  Í¬ºó¶Ë½»»¥¹ı³ÌÖĞ³öÏÖÍøÂç´íÎó
+            dataï¼š          å¾…ä¸Šä¼ çš„æ•°æ®
+        è¿”å›å€¼ï¼š
+            è¿”å›å€¼ä¸º (errcode, response)å½¢å¼çš„tuple
+            å…¶ä¸­errcodeä¸ºé”™è¯¯ç ï¼ŒERR_OKè¡¨ç¤ºæˆåŠŸï¼Œå…¶å®ƒè¡¨ç¤ºå¤±è´¥
+            æˆåŠŸæƒ…å†µä¸‹ï¼Œresponseä¸ºNone
+            å¤±è´¥æƒ…å†µä¸‹ï¼Œresponseæ˜¯æœåŠ¡å™¨è¿”å›çš„åŸå§‹ä¿¡æ¯
+        å¼‚å¸¸ï¼š
+            httplib.HTTPException:  åŒåç«¯äº¤äº’è¿‡ç¨‹ä¸­å‡ºç°ç½‘ç»œé”™è¯¯
         """
         url = self._sign('PUT', bname, oname)
         r = self.httpc.put(url, data, headers={})
         return self._handle_response(r)
  
     def get_object(self, bname, oname):
-        """ÏÂÔØobject
-        ²ÎÊı£º
-            bname(str):     bucket name£¬±ØĞëÔ¤ÏÈ´´½¨
+        """ä¸‹è½½object
+        å‚æ•°ï¼š
+            bname(str):     bucket nameï¼Œå¿…é¡»é¢„å…ˆåˆ›å»º
             oname(str):     object name
-        ·µ»ØÖµ£º
-            ·µ»ØÖµÎª (errcode, response)ĞÎÊ½µÄtuple
-            ÆäÖĞerrcodeÎª´íÎóÂë£¬ERR_OK±íÊ¾³É¹¦£¬ÆäËü±íÊ¾Ê§°Ü
-            ³É¹¦Çé¿öÏÂ£¬responseÎªobject¶ÔÓ¦µÄÊı¾İ
-            Ê§°ÜÇé¿öÏÂ£¬responseÎª·şÎñÆ÷·µ»ØµÄÔ­Ê¼ĞÅÏ¢
-        Òì³££º
-            httplib.HTTPException:  Í¬ºó¶Ë½»»¥¹ı³ÌÖĞ³öÏÖÍøÂç´íÎó
+        è¿”å›å€¼ï¼š
+            è¿”å›å€¼ä¸º (errcode, response)å½¢å¼çš„tuple
+            å…¶ä¸­errcodeä¸ºé”™è¯¯ç ï¼ŒERR_OKè¡¨ç¤ºæˆåŠŸï¼Œå…¶å®ƒè¡¨ç¤ºå¤±è´¥
+            æˆåŠŸæƒ…å†µä¸‹ï¼Œresponseä¸ºobjectå¯¹åº”çš„æ•°æ®
+            å¤±è´¥æƒ…å†µä¸‹ï¼Œresponseä¸ºæœåŠ¡å™¨è¿”å›çš„åŸå§‹ä¿¡æ¯
+        å¼‚å¸¸ï¼š
+            httplib.HTTPException:  åŒåç«¯äº¤äº’è¿‡ç¨‹ä¸­å‡ºç°ç½‘ç»œé”™è¯¯
         """
         url = self._sign('GET', bname, oname)
         r = self.httpc.get(url, headers={})
         return self._handle_response(r, 1)
 
     def del_object(self, bname, oname):        
-        """É¾³ıobject
-        ²ÎÊı£º
-            bname(str):     bucket name£¬±ØĞëÔ¤ÏÈ´´½¨
+        """åˆ é™¤object
+        å‚æ•°ï¼š
+            bname(str):     bucket nameï¼Œå¿…é¡»é¢„å…ˆåˆ›å»º
             oname(str):     object name
-        ·µ»ØÖµ£º
-            ·µ»ØÖµÎª (errcode, response)ĞÎÊ½µÄtuple
-            ÆäÖĞerrcodeÎª´íÎóÂë£¬ERR_OK±íÊ¾³É¹¦£¬ÆäËü±íÊ¾Ê§°Ü
-            ³É¹¦Çé¿öÏÂ£¬responseÎªNone
-            Ê§°ÜÇé¿öÏÂ£¬responseÊÇ·şÎñÆ÷·µ»ØµÄÔ­Ê¼ĞÅÏ¢
-        Òì³££º
-            httplib.HTTPException:  Í¬ºó¶Ë½»»¥¹ı³ÌÖĞ³öÏÖÍøÂç´íÎó
+        è¿”å›å€¼ï¼š
+            è¿”å›å€¼ä¸º (errcode, response)å½¢å¼çš„tuple
+            å…¶ä¸­errcodeä¸ºé”™è¯¯ç ï¼ŒERR_OKè¡¨ç¤ºæˆåŠŸï¼Œå…¶å®ƒè¡¨ç¤ºå¤±è´¥
+            æˆåŠŸæƒ…å†µä¸‹ï¼Œresponseä¸ºNone
+            å¤±è´¥æƒ…å†µä¸‹ï¼Œresponseæ˜¯æœåŠ¡å™¨è¿”å›çš„åŸå§‹ä¿¡æ¯
+        å¼‚å¸¸ï¼š
+            httplib.HTTPException:  åŒåç«¯äº¤äº’è¿‡ç¨‹ä¸­å‡ºç°ç½‘ç»œé”™è¯¯
         """
         url = self._sign('DELETE', bname, oname)
         r = self.httpc.delete(url, headers={})
         return self._handle_response(r)
 
     def list_objects(self, bname, prefix='', start=0, limit=100):
-        """ÁĞ¾ÙÖ¸¶¨bucketÏÂµÄËùÓĞobject
-        ²ÎÊı£º
-            bname(str):     bucket name£¬±ØĞëÔ¤ÏÈ´´½¨
-            prefix(str)£º   ÈôÖ¸¶¨£¬ÔòÖ»·µ»Ø·ûºÏprefixµÄobject
-            start(int):     listÆğÊ¼ÏÂ±ê£¬Ä¬ÈÏÎª0
-            limit(int):     ·µ»Ø½á¹û¼¯¸öÊı£¬Ä¬ÈÏÎª100
-        ·µ»ØÖµ£º
-            ·µ»ØÖµÎª (errcode, response)ĞÎÊ½µÄtuple
-            ÆäÖĞerrcodeÎª´íÎóÂë£¬ERR_OK±íÊ¾³É¹¦£¬ÆäËü±íÊ¾Ê§°Ü
-            ³É¹¦Çé¿öÏÂ£¬responseÎªobject nameÁĞ±í
-            Ê§°ÜÇé¿öÏÂ£¬responseÎª·şÎñÆ÷·µ»ØµÄÔ­Ê¼ĞÅÏ¢
-        Òì³££º
-            httplib.HTTPException:  Í¬ºó¶Ë½»»¥¹ı³ÌÖĞ³öÏÖÍøÂç´íÎó
+        """åˆ—ä¸¾æŒ‡å®šbucketä¸‹çš„æ‰€æœ‰object
+        å‚æ•°ï¼š
+            bname(str):     bucket nameï¼Œå¿…é¡»é¢„å…ˆåˆ›å»º
+            prefix(str)ï¼š   è‹¥æŒ‡å®šï¼Œåˆ™åªè¿”å›ç¬¦åˆprefixçš„object
+            start(int):     listèµ·å§‹ä¸‹æ ‡ï¼Œé»˜è®¤ä¸º0
+            limit(int):     è¿”å›ç»“æœé›†ä¸ªæ•°ï¼Œé»˜è®¤ä¸º100
+        è¿”å›å€¼ï¼š
+            è¿”å›å€¼ä¸º (errcode, response)å½¢å¼çš„tuple
+            å…¶ä¸­errcodeä¸ºé”™è¯¯ç ï¼ŒERR_OKè¡¨ç¤ºæˆåŠŸï¼Œå…¶å®ƒè¡¨ç¤ºå¤±è´¥
+            æˆåŠŸæƒ…å†µä¸‹ï¼Œresponseä¸ºobject nameåˆ—è¡¨
+            å¤±è´¥æƒ…å†µä¸‹ï¼Œresponseä¸ºæœåŠ¡å™¨è¿”å›çš„åŸå§‹ä¿¡æ¯
+        å¼‚å¸¸ï¼š
+            httplib.HTTPException:  åŒåç«¯äº¤äº’è¿‡ç¨‹ä¸­å‡ºç°ç½‘ç»œé”™è¯¯
         """
         params = { 'start': start, 'limit': limit}
         if prefix:
@@ -131,23 +130,23 @@ class BaeBCS(object):
         return (e, [o['object'].encode('utf-8') for o in d['object_list'] ]) 
 
     def copy_object(self, src_bname, src_oname, dst_bname, dst_oname):
-        """ ¸´ÖÆobject
-        ²ÎÊı£º
-            src_bname(str):     Ô´bucket name
-            src_oname(str):     Ô´object name
-            dst_bname(str):     Ä¿µÄbucket name
-            dst_oname(str):     Ä¿µÄobject name
-        ·µ»ØÖµ£º
-            ·µ»ØÖµÎª (errcode, response)ĞÎÊ½µÄtuple
-            ÆäÖĞerrcodeÎª´íÎóÂë£¬ERR_OK±íÊ¾³É¹¦£¬ÆäËü±íÊ¾Ê§°Ü
-            ³É¹¦Çé¿öÏÂ£¬responseÎªNone
-            Ê§°ÜÇé¿öÏÂ£¬responseÊÇ·şÎñÆ÷·µ»ØµÄÔ­Ê¼ĞÅÏ¢
-        Òì³££º
-            httplib.HTTPException:  Í¬ºó¶Ë½»»¥¹ı³ÌÖĞ³öÏÖÍøÂç´íÎó
+        """ å¤åˆ¶object
+        å‚æ•°ï¼š
+            src_bname(str):     æºbucket name
+            src_oname(str):     æºobject name
+            dst_bname(str):     ç›®çš„bucket name
+            dst_oname(str):     ç›®çš„object name
+        è¿”å›å€¼ï¼š
+            è¿”å›å€¼ä¸º (errcode, response)å½¢å¼çš„tuple
+            å…¶ä¸­errcodeä¸ºé”™è¯¯ç ï¼ŒERR_OKè¡¨ç¤ºæˆåŠŸï¼Œå…¶å®ƒè¡¨ç¤ºå¤±è´¥
+            æˆåŠŸæƒ…å†µä¸‹ï¼Œresponseä¸ºNone
+            å¤±è´¥æƒ…å†µä¸‹ï¼Œresponseæ˜¯æœåŠ¡å™¨è¿”å›çš„åŸå§‹ä¿¡æ¯
+        å¼‚å¸¸ï¼š
+            httplib.HTTPException:  åŒåç«¯äº¤äº’è¿‡ç¨‹ä¸­å‡ºç°ç½‘ç»œé”™è¯¯
         """
         headers = {}
         headers.update( {
-                'x-bs-copy-source': src_oname,
+                'x-bs-copy-source': "bs://%s%s" % (src_bname, src_oname),
                 'x-bs-copy-source-directive': 'copy', # copy or replace
                 })
         url = self._sign('PUT', dst_bname, dst_oname)
@@ -155,25 +154,25 @@ class BaeBCS(object):
         return self._handle_response(r)
 
     def put_superfile(self, bname, oname, objlist):
-        """ÉÏ´«superfile
-        ²ÎÊı£º
-            bname(str):     bucket name£¬±ØĞëÔ¤ÏÈ´´½¨
+        """ä¸Šä¼ superfile
+        å‚æ•°ï¼š
+            bname(str):     bucket nameï¼Œå¿…é¡»é¢„å…ˆåˆ›å»º
             oname(str):     object name
-            objlist(list)£º ×é³ÉsuperfileµÄobjectÁĞ±í£¬ĞÎÊ½Îª [('bucket1', '/obj1'), ('bucket2', '/obj2')]          
-        ·µ»ØÖµ£º
-            ·µ»ØÖµÎª (errcode, response)ĞÎÊ½µÄtuple
-            ÆäÖĞerrcodeÎª´íÎóÂë£¬ERR_OK±íÊ¾³É¹¦£¬ÆäËü±íÊ¾Ê§°Ü
-            ³É¹¦Çé¿öÏÂ£¬responseÎªNone
-            Ê§°ÜÇé¿öÏÂ£¬responseÊÇ·şÎñÆ÷·µ»ØµÄÔ­Ê¼ĞÅÏ¢
-        Òì³££º
-            httplib.HTTPException:  Í¬ºó¶Ë½»»¥¹ı³ÌÖĞ³öÏÖÍøÂç´íÎó
+            objlist(list)ï¼š ç»„æˆsuperfileçš„objectåˆ—è¡¨ï¼Œå½¢å¼ä¸º [('bucket1', '/obj1'), ('bucket2', '/obj2')]          
+        è¿”å›å€¼ï¼š
+            è¿”å›å€¼ä¸º (errcode, response)å½¢å¼çš„tuple
+            å…¶ä¸­errcodeä¸ºé”™è¯¯ç ï¼ŒERR_OKè¡¨ç¤ºæˆåŠŸï¼Œå…¶å®ƒè¡¨ç¤ºå¤±è´¥
+            æˆåŠŸæƒ…å†µä¸‹ï¼Œresponseä¸ºNone
+            å¤±è´¥æƒ…å†µä¸‹ï¼Œresponseæ˜¯æœåŠ¡å™¨è¿”å›çš„åŸå§‹ä¿¡æ¯
+        å¼‚å¸¸ï¼š
+            httplib.HTTPException:  åŒåç«¯äº¤äº’è¿‡ç¨‹ä¸­å‡ºç°ç½‘ç»œé”™è¯¯
         """
         l = []
         try:
             for idx, (b, o) in enumerate(objlist):
                 r = self._head_object(b, o)
                 etag = r['header']['etag']
-                l.append('"part_%d": {"url": "bs://%s/%s", "etag":"%s"}' % (
+                l.append('"part_%d": {"url": "bs://%s%s", "etag":"%s"}' % (
                     idx, b, o, etag))
         except Exception, e:
             return (ERR_RESPONSE, str(e))
@@ -184,53 +183,53 @@ class BaeBCS(object):
         return self._handle_response(r)
 
     def set_acl(self, bname, oname, acl):
-        """ ÉèÖÃbucket»òÕßobjectµÄACL
-        ²ÎÊı£º
-            bname(str):     bucket name£¬±ØĞëÔ¤ÏÈ´´½¨
-            oname(str):     object name£»ÈôÎª''£¬±íÊ¾ÉèÖÃbucketµÄACL£¬·ñÔòÉèÖÃobjectµÄACL
-            acl(str)£º      ÃèÊöÖ¸¶¨bucket»òobjectµÄACLµÄ×Ö·û´®
-        ·µ»ØÖµ£º
-            ·µ»ØÖµÎª (errcode, response)ĞÎÊ½µÄtuple
-            ÆäÖĞerrcodeÎª´íÎóÂë£¬ERR_OK±íÊ¾³É¹¦£¬ÆäËü±íÊ¾Ê§°Ü
-            ³É¹¦Çé¿öÏÂ£¬responseÎªNone
-            Ê§°ÜÇé¿öÏÂ£¬responseÊÇ·şÎñÆ÷·µ»ØµÄÔ­Ê¼ĞÅÏ¢
-        Òì³££º
-            httplib.HTTPException:  Í¬ºó¶Ë½»»¥¹ı³ÌÖĞ³öÏÖÍøÂç´íÎó
+        """ è®¾ç½®bucketæˆ–è€…objectçš„ACL
+        å‚æ•°ï¼š
+            bname(str):     bucket nameï¼Œå¿…é¡»é¢„å…ˆåˆ›å»º
+            oname(str):     object nameï¼›è‹¥ä¸º''ï¼Œè¡¨ç¤ºè®¾ç½®bucketçš„ACLï¼Œå¦åˆ™è®¾ç½®objectçš„ACL
+            acl(str)ï¼š      æè¿°æŒ‡å®šbucketæˆ–objectçš„ACLçš„å­—ç¬¦ä¸²
+        è¿”å›å€¼ï¼š
+            è¿”å›å€¼ä¸º (errcode, response)å½¢å¼çš„tuple
+            å…¶ä¸­errcodeä¸ºé”™è¯¯ç ï¼ŒERR_OKè¡¨ç¤ºæˆåŠŸï¼Œå…¶å®ƒè¡¨ç¤ºå¤±è´¥
+            æˆåŠŸæƒ…å†µä¸‹ï¼Œresponseä¸ºNone
+            å¤±è´¥æƒ…å†µä¸‹ï¼Œresponseæ˜¯æœåŠ¡å™¨è¿”å›çš„åŸå§‹ä¿¡æ¯
+        å¼‚å¸¸ï¼š
+            httplib.HTTPException:  åŒåç«¯äº¤äº’è¿‡ç¨‹ä¸­å‡ºç°ç½‘ç»œé”™è¯¯
         """
         url = self._sign('PUT', bname, oname) + '&acl=1'
         r = self.httpc.put(url, acl, headers={})
         return self._handle_response(r)
 
     def get_acl(self, bname, oname):
-        """ »ñÈ¡bucket»òÕßobjectµÄACL
-        ²ÎÊı£º
-            bname(str):     bucket name£¬±ØĞëÔ¤ÏÈ´´½¨
-            oname(str):     object name£»ÈôÎª'',±íÊ¾»ñÈ¡bucketµÄACL£¬·ñÔò»ñÈ¡objectµÄACL
-        ·µ»ØÖµ£º
-            ·µ»ØÖµÎª (errcode, response)ĞÎÊ½µÄtuple
-            ÆäÖĞerrcodeÎª´íÎóÂë£¬ERR_OK±íÊ¾³É¹¦£¬ÆäËü±íÊ¾Ê§°Ü
-            ³É¹¦Çé¿öÏÂ£¬responseÎªÃèÊöbucket»òobject¶ÔÓ¦µÄACLµÄ×Ö·û´®
-            Ê§°ÜÇé¿öÏÂ£¬responseÎª·şÎñÆ÷·µ»ØµÄÔ­Ê¼ĞÅÏ¢
-        Òì³££º
-            httplib.HTTPException:  Í¬ºó¶Ë½»»¥¹ı³ÌÖĞ³öÏÖÍøÂç´íÎó
+        """ è·å–bucketæˆ–è€…objectçš„ACL
+        å‚æ•°ï¼š
+            bname(str):     bucket nameï¼Œå¿…é¡»é¢„å…ˆåˆ›å»º
+            oname(str):     object nameï¼›è‹¥ä¸º'',è¡¨ç¤ºè·å–bucketçš„ACLï¼Œå¦åˆ™è·å–objectçš„ACL
+        è¿”å›å€¼ï¼š
+            è¿”å›å€¼ä¸º (errcode, response)å½¢å¼çš„tuple
+            å…¶ä¸­errcodeä¸ºé”™è¯¯ç ï¼ŒERR_OKè¡¨ç¤ºæˆåŠŸï¼Œå…¶å®ƒè¡¨ç¤ºå¤±è´¥
+            æˆåŠŸæƒ…å†µä¸‹ï¼Œresponseä¸ºæè¿°bucketæˆ–objectå¯¹åº”çš„ACLçš„å­—ç¬¦ä¸²
+            å¤±è´¥æƒ…å†µä¸‹ï¼Œresponseä¸ºæœåŠ¡å™¨è¿”å›çš„åŸå§‹ä¿¡æ¯
+        å¼‚å¸¸ï¼š
+            httplib.HTTPException:  åŒåç«¯äº¤äº’è¿‡ç¨‹ä¸­å‡ºç°ç½‘ç»œé”™è¯¯
         """
         url = self._sign('GET', bname, oname) + '&acl=1'
         r = self.httpc.get(url, headers={})
         return self._handle_response(r, 1)
 
     def put_file(self, bname, oname, filename):
-        """ÉÏ´«ÎÄ¼şµ½Ö¸¶¨µÄobject
-        ²ÎÊı£º
-            bname(str):     bucket name£¬±ØĞëÔ¤ÏÈ´´½¨
+        """ä¸Šä¼ æ–‡ä»¶åˆ°æŒ‡å®šçš„object
+        å‚æ•°ï¼š
+            bname(str):     bucket nameï¼Œå¿…é¡»é¢„å…ˆåˆ›å»º
             oname(str):     object name
-            filename(str)£º ´ıÉÏ´«µÄÎÄ¼ş
-        ·µ»ØÖµ£º
-            ·µ»ØÖµÎª (errcode, response)ĞÎÊ½µÄtuple
-            ÆäÖĞerrcodeÎª´íÎóÂë£¬ERR_OK±íÊ¾³É¹¦£¬ÆäËü±íÊ¾Ê§°Ü
-            ³É¹¦Çé¿öÏÂ£¬responseÎªNone
-            Ê§°ÜÇé¿öÏÂ£¬responseÊÇ·şÎñÆ÷·µ»ØµÄÔ­Ê¼ĞÅÏ¢
-        Òì³££º
-            httplib.HTTPException:  Í¬ºó¶Ë½»»¥¹ı³ÌÖĞ³öÏÖÍøÂç´íÎó
+            filename(str)ï¼š å¾…ä¸Šä¼ çš„æ–‡ä»¶
+        è¿”å›å€¼ï¼š
+            è¿”å›å€¼ä¸º (errcode, response)å½¢å¼çš„tuple
+            å…¶ä¸­errcodeä¸ºé”™è¯¯ç ï¼ŒERR_OKè¡¨ç¤ºæˆåŠŸï¼Œå…¶å®ƒè¡¨ç¤ºå¤±è´¥
+            æˆåŠŸæƒ…å†µä¸‹ï¼Œresponseä¸ºNone
+            å¤±è´¥æƒ…å†µä¸‹ï¼Œresponseæ˜¯æœåŠ¡å™¨è¿”å›çš„åŸå§‹ä¿¡æ¯
+        å¼‚å¸¸ï¼š
+            httplib.HTTPException:  åŒåç«¯äº¤äº’è¿‡ç¨‹ä¸­å‡ºç°ç½‘ç»œé”™è¯¯
         """
         if not os.path.isfile(filename):
             raise Exception(filename + ' is not a file')
@@ -240,38 +239,37 @@ class BaeBCS(object):
         return self._handle_response(r)
 
     def get_to_file(self, bname, oname, filename):
-        """ ÏÂÔØÖ¸¶¨objectµÄÊı¾İ£¬²¢±£´æµ½Ö¸¶¨ÎÄ¼şÖĞ
-        ²ÎÊı£º
-            bname(str):     bucket name£¬±ØĞëÔ¤ÏÈ´´½¨
+        """ ä¸‹è½½æŒ‡å®šobjectçš„æ•°æ®ï¼Œå¹¶ä¿å­˜åˆ°æŒ‡å®šæ–‡ä»¶ä¸­
+        å‚æ•°ï¼š
+            bname(str):     bucket nameï¼Œå¿…é¡»é¢„å…ˆåˆ›å»º
             oname(str):     object name
-            filename(str)£º ÓÃÓÚ±£´æÊı¾İµÄÎÄ¼ş
-        ·µ»ØÖµ£º
-            ·µ»ØÖµÎª (errcode, response)ĞÎÊ½µÄtuple
-            ÆäÖĞerrcodeÎª´íÎóÂë£¬ERR_OK±íÊ¾³É¹¦£¬ÆäËü±íÊ¾Ê§°Ü
-            ³É¹¦Çé¿öÏÂ£¬responseÎªNone
-            Ê§°ÜÇé¿öÏÂ£¬responseÊÇ·şÎñÆ÷·µ»ØµÄÔ­Ê¼ĞÅÏ¢
-        Òì³££º
-            httplib.HTTPException:  Í¬ºó¶Ë½»»¥¹ı³ÌÖĞ³öÏÖÍøÂç´íÎó
+            filename(str)ï¼š ç”¨äºä¿å­˜æ•°æ®çš„æ–‡ä»¶
+        è¿”å›å€¼ï¼š
+            è¿”å›å€¼ä¸º (errcode, response)å½¢å¼çš„tuple
+            å…¶ä¸­errcodeä¸ºé”™è¯¯ç ï¼ŒERR_OKè¡¨ç¤ºæˆåŠŸï¼Œå…¶å®ƒè¡¨ç¤ºå¤±è´¥
+            æˆåŠŸæƒ…å†µä¸‹ï¼Œresponseä¸ºNone
+            å¤±è´¥æƒ…å†µä¸‹ï¼Œresponseæ˜¯æœåŠ¡å™¨è¿”å›çš„åŸå§‹ä¿¡æ¯
+        å¼‚å¸¸ï¼š
+            httplib.HTTPException:  åŒåç«¯äº¤äº’è¿‡ç¨‹ä¸­å‡ºç°ç½‘ç»œé”™è¯¯
         """
         url = self._sign('GET', bname, oname)
         r = self.httpc.get_file(url, filename, headers={})
         return self._handle_response(r)
 
     def make_public(self, bname, oname, user=None):
-        """ ÔÊĞíÖ¸¶¨user·ÃÎÊÖ¸¶¨µÄbucket»òobject
-        ²ÎÊı£º
-            bname(str):     bucket name£¬±ØĞëÔ¤ÏÈ´´½¨
+        """ å…è®¸æŒ‡å®šuserè®¿é—®æŒ‡å®šçš„bucketæˆ–object
+        å‚æ•°ï¼š
+            bname(str):     bucket nameï¼Œå¿…é¡»é¢„å…ˆåˆ›å»º
             oname(str):     object name
-            user(str)£º     ÊÚÈ¨µÄÓÃ»§Ãû³Æ£¬Èô²»Ö¸¶¨£¬Ôò±íÊ¾ËùÓĞÓÃ»§
-        ·µ»ØÖµ£º
-            ·µ»ØÖµÎª (errcode, response)ĞÎÊ½µÄtuple
-            ÆäÖĞerrcodeÎª´íÎóÂë£¬ERR_OK±íÊ¾³É¹¦£¬ÆäËü±íÊ¾Ê§°Ü
-            ³É¹¦Çé¿öÏÂ£¬responseÎªNone
-            Ê§°ÜÇé¿öÏÂ£¬responseÊÇ·şÎñÆ÷·µ»ØµÄÔ­Ê¼ĞÅÏ¢
-        Òì³££º
-            httplib.HTTPException:  Í¬ºó¶Ë½»»¥¹ı³ÌÖĞ³öÏÖÍøÂç´íÎó
+            user(str)ï¼š     æˆæƒçš„ç”¨æˆ·åç§°ï¼Œè‹¥ä¸æŒ‡å®šï¼Œåˆ™è¡¨ç¤ºæ‰€æœ‰ç”¨æˆ·
+        è¿”å›å€¼ï¼š
+            è¿”å›å€¼ä¸º (errcode, response)å½¢å¼çš„tuple
+            å…¶ä¸­errcodeä¸ºé”™è¯¯ç ï¼ŒERR_OKè¡¨ç¤ºæˆåŠŸï¼Œå…¶å®ƒè¡¨ç¤ºå¤±è´¥
+            æˆåŠŸæƒ…å†µä¸‹ï¼Œresponseä¸ºNone
+            å¤±è´¥æƒ…å†µä¸‹ï¼Œresponseæ˜¯æœåŠ¡å™¨è¿”å›çš„åŸå§‹ä¿¡æ¯
+        å¼‚å¸¸ï¼š
+            httplib.HTTPException:  åŒåç«¯äº¤äº’è¿‡ç¨‹ä¸­å‡ºç°ç½‘ç»œé”™è¯¯
         """
-
         acl = '{"statements":[{"action":["*"],"effect":"allow","resource":["%s%s"],"user":["%s"]}]}' % (
             bname, oname, (user if user else "*"))
         return self.set_acl(bname, oname, acl)

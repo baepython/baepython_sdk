@@ -67,9 +67,8 @@ def test():
     print "put_superfile()"
     objlist = [(bname, obj1), (bname, obj2)]
     e, d = bcs.put_superfile(bname, sup1, objlist )
-    print e
+    assert e == 0
     print d
-    #assert e == 0
     time.sleep(1)
 
     print "put_file()"
@@ -77,8 +76,12 @@ def test():
     assert e == 0
     time.sleep(1)
 
-    filename2 = os.path.dirname(__file__) + "/testdata2" 
-    os.system("rm -f %s" % filename2)
+    try:
+        from bae.core import const
+        tmpdir = const.APP_TMPDIR
+    except:
+        tmpdir = "/tmp"
+    filename2 = tmpdir + "/testdata2" 
 
     print "get_to_file()"
     e, d = bcs.get_to_file(bname, obj3, filename2)
