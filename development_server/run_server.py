@@ -2,7 +2,7 @@
 
 import os
 import imp
-from werkzeug.serving import run_simple
+from misc.werkzeug.serving import run_simple
 from optparse import OptionParser
 
 def main():
